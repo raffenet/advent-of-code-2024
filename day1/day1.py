@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+import sys
+if len(sys.argv) >= 2 and sys.argv[1] == '-s':
+    input = open('sample.txt', 'r')
+else:
+    input = open('input.txt', 'r')
 
-#input = open('sample.txt', 'r')
-input = open('input.txt', 'r')
 left = [int(each.rstrip('\n').split()[0]) for each in input.readlines()]
 input.seek(0)
 right = [int(each.rstrip('\n').split()[1]) for each in input.readlines()]
