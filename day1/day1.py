@@ -6,7 +6,7 @@ if len(sys.argv) >= 2 and sys.argv[1] == '-s':
 else:
     input = open('input.txt', 'r')
 
-pairs = [each.rstrip('\n').split() for each in input.readlines()]
+pairs = [each.strip().split() for each in input.readlines()]
 left = sorted([int(each[0]) for each in pairs])
 right = sorted([int(each[1]) for each in pairs])
 
