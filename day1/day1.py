@@ -14,9 +14,9 @@ right.sort()
 total = 0
 for i in range(len(left)):
     total += abs(left[i] - right[i])
-print("part 1: " + str(total))
+print("part 1:", total)
 
 similarity_score = 0
 for each in left:
     similarity_score += each * right.count(each)
-print("part 2: " + str(similarity_score))
+print("part 2:", similarity_score)
