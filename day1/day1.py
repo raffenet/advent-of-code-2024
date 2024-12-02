@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import sys
 if len(sys.argv) >= 2 and sys.argv[1] == '-s':
     input = open('sample.txt', 'r')
@@ -12,8 +13,8 @@ left.sort()
 right.sort()
 
 total = 0
-for i in range(len(left)):
-    total += abs(left[i] - right[i])
+for each in zip(left, right):
+    total += abs(each[0] - each[1])
 print("part 1:", total)
 
 similarity_score = 0
