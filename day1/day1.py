@@ -5,9 +5,9 @@ if len(sys.argv) >= 2 and sys.argv[1] == '-s':
 else:
     input = open('input.txt', 'r')
 
-left = [int(each.rstrip('\n').split()[0]) for each in input.readlines()]
-input.seek(0)
-right = [int(each.rstrip('\n').split()[1]) for each in input.readlines()]
+pairs = [each.rstrip('\n').split() for each in input.readlines()]
+left = [int(each[0]) for each in pairs]
+right = [int(each[1]) for each in pairs]
 left.sort()
 right.sort()
 
