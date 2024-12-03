@@ -9,7 +9,7 @@ input = open(filename, 'r')
 reports = [list(map(lambda n: int(n), each.strip().split())) for each in input.readlines()]
 
 def is_safe(report):
-    diffs = [each[1] - report[each[0]] for each in enumerate(report[1:])]
+    diffs = [cur - report[prev_idx] for prev_idx, cur in enumerate(report[1:])]
     return all(map(lambda n: n in [1, 2, 3], diffs)) or all(map(lambda n: n in [-1, -2, -3], diffs))
 
 print("part 1:", sum(map(is_safe, reports)))
@@ -17,9 +17,9 @@ print("part 1:", sum(map(is_safe, reports)))
 def is_safe2(report):
     if is_safe(report):
         return True
-    for i in enumerate(report):
+    for i in range(len(report)):
         tmp = report.copy()
-        tmp.pop(i[0])
+        tmp.pop(i)
         if is_safe(tmp):
             return True
     return False
