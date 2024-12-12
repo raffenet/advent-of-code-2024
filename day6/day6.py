@@ -48,13 +48,17 @@ def move(x, y, guard):
         newx = x-1
     return newx, newy, guard
 
+def find_guard(map):
+    for y, row in enumerate(map):
+        for x, char in enumerate(row):
+            if is_guard(char):
+                return x,y
+
 pos = {}
-for y, row in enumerate(map):
-    for x, char in enumerate(row):
-        if is_guard(char):
-            pos[x,y] = 1
-            guard = char
-            while is_inbounds(x, y):
-                x, y, guard = move(x, y, guard)
-                pos[x,y] = 1
-            print("part 1:", len(pos)-1)
+x, y = find_guard(map)
+guard = map[y][x]
+pos[x,y] = 1
+while is_inbounds(x, y):
+    x, y, guard = move(x, y, guard)
+    pos[x,y] = 1
+print("part 1:", len(pos)-1)
