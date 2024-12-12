@@ -52,11 +52,10 @@ def find_guard(map):
     for y, row in enumerate(map):
         for x, char in enumerate(row):
             if is_guard(char):
-                return x,y
+                return x,y,map[y][x]
 
 pos = {}
-x, y = find_guard(map)
-guard = map[y][x]
+x, y, guard = find_guard(map)
 pos[x,y] = 1
 while is_inbounds(x, y):
     x, y, guard = move(x, y, guard)
