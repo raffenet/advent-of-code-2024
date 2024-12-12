@@ -12,7 +12,6 @@ left = "<"
 right = ">"
 up = "^"
 down = "v"
-guard = ""
 
 def is_inbounds(x,y):
     return x >= 0 and x < len(map[0]) and y >= 0 and y < len(map)
