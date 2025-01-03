@@ -22,3 +22,19 @@ for each in eq:
         result = result + each[0]
 
 print("part 1:", result)
+
+def is_calibrated2(total, partial, i, nums):
+    if i == len(nums):
+        return partial == total
+    elif partial <= total:
+        return is_calibrated2(total, partial * nums[i], i+1, nums) or \
+            is_calibrated2(total, partial + nums[i], i+1, nums) or \
+            is_calibrated2(total, int(str(partial) + str(nums[i])), i+1, nums)
+    return False
+
+result = 0
+for each in eq:
+    if is_calibrated2(each[0], each[1][0], 1, each[1]):
+        result = result + each[0]
+
+print("part 2:", result)
