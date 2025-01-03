@@ -60,13 +60,10 @@ print("part 1:", num)
 def xmas(x, y, wordsearch):
     if x-1 < 0 or x+1 == len(wordsearch[0]) or y-1 < 0 or y+1 == len(wordsearch):
         return 0
-    if wordsearch[y-1][x-1] == 'M' and wordsearch[y-1][x+1] == 'M' and wordsearch[y+1][x-1] == 'S' and wordsearch[y+1][x+1] == 'S':
-        return 1
-    if wordsearch[y-1][x-1] == 'S' and wordsearch[y-1][x+1] == 'S' and wordsearch[y+1][x-1] == 'M' and wordsearch[y+1][x+1] == 'M':
-        return 1
-    if wordsearch[y-1][x-1] == 'S' and wordsearch[y-1][x+1] == 'M' and wordsearch[y+1][x-1] == 'S' and wordsearch[y+1][x+1] == 'M':
-        return 1
-    if wordsearch[y-1][x-1] == 'M' and wordsearch[y-1][x+1] == 'S' and wordsearch[y+1][x-1] == 'M' and wordsearch[y+1][x+1] == 'S':
+    if (wordsearch[y-1][x-1] == 'M' and wordsearch[y-1][x+1] == 'M' and wordsearch[y+1][x-1] == 'S' and wordsearch[y+1][x+1] == 'S') or \
+        (wordsearch[y-1][x-1] == 'S' and wordsearch[y-1][x+1] == 'S' and wordsearch[y+1][x-1] == 'M' and wordsearch[y+1][x+1] == 'M') or \
+        (wordsearch[y-1][x-1] == 'S' and wordsearch[y-1][x+1] == 'M' and wordsearch[y+1][x-1] == 'S' and wordsearch[y+1][x+1] == 'M') or \
+        (wordsearch[y-1][x-1] == 'M' and wordsearch[y-1][x+1] == 'S' and wordsearch[y+1][x-1] == 'M' and wordsearch[y+1][x+1] == 'S'):
         return 1
     return 0
 
