@@ -6,35 +6,29 @@ else:
     filename = 'day7/input.txt'
 
 input = open(filename, 'r')
-eq = [(int(x), [int(n) for n in y.strip().split()]) for (x,y) in [each.split(':') for each in input.readlines()]]
+eqs = [(int(x), [int(n) for n in y.strip().split()]) for (x,y) in [each.split(':') for each in input.readlines()]]
 
-def is_calibrated(total, partial, i, nums):
-    if i == len(nums):
-        return partial == total
+def validate(total, partial, i, nums, concat=False):
+    if i == 0:
+        return validate(total, nums[i], i+1, nums, concat)
+    elif i == len(nums) and partial == total:
+        return total
+    elif i == len(nums):
+        return 0
+    elif concat and partial <= total:
+        return validate(total, partial * nums[i], i+1, nums, concat) or \
+            validate(total, partial + nums[i], i+1, nums, concat) or \
+            validate(total, int(str(partial) + str(nums[i])), i+1, nums, concat)
     elif partial <= total:
-        return is_calibrated(total, partial * nums[i], i+1, nums) or is_calibrated(total, partial + nums[i], i+1, nums)
-    return False
- 
+        return validate(total, partial * nums[i], i+1, nums) or \
+            validate(total, partial + nums[i], i+1, nums)
+    return 0
 
-result = 0
-for each in eq:
-    if is_calibrated(each[0], each[1][0], 1, each[1]):
-        result = result + each[0]
+def calibrated(eq):
+    return validate(eq[0], -1, 0, eq[1])
 
-print("part 1:", result)
+def calibrated2(eq):
+    return validate(eq[0], -1, 0, eq[1], concat=True)
 
-def is_calibrated2(total, partial, i, nums):
-    if i == len(nums):
-        return partial == total
-    elif partial <= total:
-        return is_calibrated2(total, partial * nums[i], i+1, nums) or \
-            is_calibrated2(total, partial + nums[i], i+1, nums) or \
-            is_calibrated2(total, int(str(partial) + str(nums[i])), i+1, nums)
-    return False
-
-result = 0
-for each in eq:
-    if is_calibrated2(each[0], each[1][0], 1, each[1]):
-        result = result + each[0]
-
-print("part 2:", result)
+print("part 1:", sum(map(calibrated, eqs)))
+print("part 2:", sum(map(calibrated2, eqs)))
